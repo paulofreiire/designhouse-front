@@ -2,20 +2,19 @@
   <section class="authentication">
     <div class="auth-body">
       <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
-        Login
+        RESET PASSWORD
       </h1>
       <form class="auth-form" @submit.prevent="submit">
-        <alert-error v-if="form.errors.has('message')" :form="form">
-          {{ form.errors.get('message')}}
-          <nuxt-link :to="{ name: 'verification.resend'}">
-            Resend verification email
-          </nuxt-link>
-        </alert-error>
+        <alert-success :form="form">
+          {{ status }}
+          <nuxt-link to="{name: 'login'}">Proceed to login</nuxt-link>
+        </alert-success>
         <div class="form-group">
           <input
             type="text"
             name="email"
             v-model="form.email"
+            readonly
             class="form-control form-control-lg font-14 fw-300"
             :class="{'is-invalid' : form.errors.has('email')}"
             placeholder="Email"
@@ -29,29 +28,30 @@
             v-model="form.password"
             class="form-control form-control-lg font-14 fw-300"
             :class="{'is-invalid' : form.errors.has('password')}"
-            placeholder="Password"
+            placeholder="New Password"
           />
           <has-error :form="form" field="password"></has-error>
         </div>
-        <div class="mt-2 mb-2 d-inline-flex justify-content-between">
-          <nuxt-link :to="{ name: 'password-email'}" class="forgot-pass color-blue font-14 fw-400 p-2" href="#"> Forgot
-            password?
-          </nuxt-link>
-
-          <div class="p-2">
-            <button type="submit" :disabled="form.busy"
-                    class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase">
+        <div class="form-group">
+          <input
+            type="password"
+            name="password"
+            v-model="form.password_confirmation"
+            class="form-control form-control-lg font-14 fw-300"
+            :class="{'is-invalid' : form.errors.has('password_confirmation')}"
+            placeholder="Confirm new password"
+          />
+          <has-error :form="form" field="password_confirmation"></has-error>
+        </div>
+        <div class="text-center">
+          <button type="submit" :disabled="form.busy"
+                  class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase">
             <span v-if="form.busy">
               <i class="fas fa-spinner fa-spin"></i>
             </span>
-              Login
-            </button>
-          </div>
+            Confirm
+          </button>
         </div>
-        <p class="font-14 fw-400 text-center mt-4">
-          Don't have an account yet?
-          <nuxt-link :to="{ name: 'register'}" class="color-blue" href="#"> Create an account</nuxt-link>
-        </p>
       </form>
     </div>
   </section>
@@ -59,28 +59,31 @@
 
 <script>
   export default {
-    name: "login.vue",
     data() {
       return {
+        status: '',
         form: this.$vform({
           email: '',
           password: '',
+          password_confirmation: '',
+          token: ''
         })
       };
     },
 
     methods: {
       submit() {
-        this.$auth.loginWith('local', {
-          data: this.form
-        }).then(res => {
-        }).catch(error => {
-          this.form.errors.set(error.response.data.errors)
-          console.log(error.response.data.errors)
+        this.form.post('/password/reset').then(res => {
+          this.status = res.data.status;
+          this.form.reset();
         });
       }
-    }
+    },
 
+    created() {
+      this.form.email = this.$route.query.email
+      this.form.token = this.$route.params.token
+    }
   };
 </script>
 

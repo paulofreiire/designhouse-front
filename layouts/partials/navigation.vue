@@ -87,10 +87,10 @@
               />
               <div class="usr-info">
                                 <span class="user-name font-14 fw-500"
-                                >John Doe</span
+                                >{{$auth.user.name}}</span
                                 >
                 <span class="user-deg font-10 fw-300"
-                >Sr. UI Designer</span
+                >{{$auth.user.tagline}}</span
                 >
                 <span class="down-chevron">
                                     <i class="fa fa-angle-down"></i>
@@ -119,7 +119,7 @@
                 Setting
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" title="Sign Out">
+              <a class="dropdown-item" href="#"  @click.prevent="logout" title="Sign Out">
                 <i class="fa fa-lock"></i>
                 Sign Out
               </a>
@@ -135,7 +135,12 @@
 
 <script>
   export default {
-    name: "navigation.vue"
+    name: "navigation.vue",
+    methods: {
+      logout(){
+        this.$auth.logout()
+      }
+    }
   }
 </script>
 
