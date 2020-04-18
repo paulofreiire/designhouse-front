@@ -9,24 +9,22 @@
           {{ status }}
         </alert-success>
         <div class="form-group">
-          <input
+          <base-input v-model="form.email" placeholder="Email">
+          </base-input>
+          <!--<input
             type="text"
             name="email"
             v-model="form.email"
             class="form-control form-control-lg font-14 fw-300"
             :class="{'is-invalid' : form.errors.has('email')}"
             placeholder="Email"
-          />
+          />-->
           <has-error :form="form" field="email"></has-error>
         </div>
         <div class="text-center">
-          <button type="submit" :disabled="form.busy"
-                  class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase">
-            <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"></i>
-            </span>
+          <base-button :loading="form.busy">
             Send Reset Login
-          </button>
+          </base-button>
         </div>
         <p class="font-14 fw-400 text-center mt-4">
           <nuxt-link :to="{ name: 'login'}" class="color-blue" href="#"> Back to Login</nuxt-link>
@@ -37,7 +35,10 @@
 </template>
 
 <script>
+  import BaseInput from "../../../components/_global/inputs/_base-input";
+
   export default {
+    components: {BaseInput},
     data() {
       return {
         status: '',

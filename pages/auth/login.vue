@@ -39,13 +39,9 @@
           </nuxt-link>
 
           <div class="p-2">
-            <button type="submit" :disabled="form.busy"
-                    class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase">
-            <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"></i>
-            </span>
+            <base-button :loading="form.busy">
               Login
-            </button>
+            </base-button>
           </div>
         </div>
         <p class="font-14 fw-400 text-center mt-4">
