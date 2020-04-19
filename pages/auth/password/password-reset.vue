@@ -10,38 +10,31 @@
           <nuxt-link to="{name: 'login'}">Proceed to login</nuxt-link>
         </alert-success>
         <div class="form-group">
-          <input
-            type="text"
-            name="email"
+          <base-input
+            isReadOnly="true"
+            :form="form"
+            field="email"
             v-model="form.email"
-            readonly
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('email')}"
-            placeholder="Email"
-          />
-          <has-error :form="form" field="email"></has-error>
+            placeholder="Email">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="password"
+          <base-input
+            :form="form"
+            field="password_"
+            inputType="password"
             v-model="form.password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('password')}"
-            placeholder="New Password"
-          />
-          <has-error :form="form" field="password"></has-error>
+            placeholder="Password">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="password"
+          <base-input
+            :form="form"
+            field="password_confirmation"
+            inputType="password"
             v-model="form.password_confirmation"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('password_confirmation')}"
-            placeholder="Confirm new password"
-          />
-          <has-error :form="form" field="password_confirmation"></has-error>
+            placeholder="Password confirmation">
+          </base-input>
         </div>
         <div class="text-center">
           <base-button :loading="form.busy">

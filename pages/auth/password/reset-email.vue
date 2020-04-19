@@ -9,17 +9,12 @@
           {{ status }}
         </alert-success>
         <div class="form-group">
-          <base-input v-model="form.email" placeholder="Email">
-          </base-input>
-          <!--<input
-            type="text"
-            name="email"
+          <base-input
+            :form="form"
+            field="email"
             v-model="form.email"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('email')}"
-            placeholder="Email"
-          />-->
-          <has-error :form="form" field="email"></has-error>
+            placeholder="Email">
+          </base-input>
         </div>
         <div class="text-center">
           <base-button :loading="form.busy">
@@ -35,10 +30,7 @@
 </template>
 
 <script>
-  import BaseInput from "../../../components/_global/inputs/_base-input";
-
   export default {
-    components: {BaseInput},
     data() {
       return {
         status: '',
@@ -50,6 +42,7 @@
 
     methods: {
       submit() {
+
         this.form.post('/password/email').then(res => {
           this.status = res.data.message;
           this.form.reset();

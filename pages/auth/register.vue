@@ -11,60 +11,47 @@
           We have sent you an email to active your account
         </alert-success>
         <div class="form-group">
-          <input
-            type="text"
-            v-model.trim="form.name"
-            name="name"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('name')}"
-            placeholder="Full Name"
-          />
-          <has-error :form="form" field="name"></has-error>
-
+          <base-input
+            :form="form"
+            field="name"
+            v-model="form.name"
+            placeholder="Name">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="text"
+          <base-input
+            :form="form"
+            field="username"
             v-model.trim="form.username"
-            name="username"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('username')}"
-            placeholder="Username"
-          />
-          <has-error :form="form" field="username"></has-error>
+            placeholder="Username">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="text"
-            v-model.trim="form.email"
-            name="email"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('email')}"
-            placeholder="Email"
-          />
-          <has-error :form="form" field="email"></has-error>
+          <base-input
+            :form="form"
+            field="email"
+            v-model="form.email"
+            placeholder="Email">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
+          <base-input
+            :form="form"
+            field="password"
+            inputType="password"
             v-model.trim="form.password"
-            name="password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('password')}"
-            placeholder="Password"
-          />
-          <has-error :form="form" field="password"></has-error>
+            placeholder="Password">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
+          <base-input
+            :form="form"
+            field="password_confirmation"
+            inputType="password"
             v-model.trim="form.password_confirmation"
-            name="password_confirmation"
-            class="form-control form-control-lg font-14 fw-300"
-            placeholder="Confirm Password"
-          />
+            placeholder="Password confirmation">
+          </base-input>
         </div>
-
         <div class="text-right">
           <base-button :loading="form.busy">
             Register

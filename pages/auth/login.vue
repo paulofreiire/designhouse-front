@@ -12,26 +12,21 @@
           </nuxt-link>
         </alert-error>
         <div class="form-group">
-          <input
-            type="text"
-            name="email"
+          <base-input
+            :form="form"
+            field="email"
             v-model="form.email"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('email')}"
-            placeholder="Email"
-          />
-          <has-error :form="form" field="email"></has-error>
+            placeholder="Email">
+          </base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="password"
+          <base-input
+            :form="form"
+            field="password"
+            inputType="password"
             v-model="form.password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid' : form.errors.has('password')}"
-            placeholder="Password"
-          />
-          <has-error :form="form" field="password"></has-error>
+            placeholder="Password">
+          </base-input>
         </div>
         <div class="mt-2 mb-2 d-inline-flex justify-content-between">
           <nuxt-link :to="{ name: 'password-email'}" class="forgot-pass color-blue font-14 fw-400 p-2" href="#"> Forgot
