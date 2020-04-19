@@ -3,7 +3,7 @@
     <input
       class="form-control form-control-lg font-14 fw-300"
       :type="inputType"
-      :readonly="isReadOnly"
+      :readonly=isReadOnly
       :placeholder="placeholder"
       :class="{'is-invalid' : form.errors.has(field)}"
       :value="value"

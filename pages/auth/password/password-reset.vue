@@ -11,7 +11,7 @@
         </alert-success>
         <div class="form-group">
           <base-input
-            isReadOnly="true"
+            v-bind:isReadOnly=true
             :form="form"
             field="email"
             v-model="form.email"
@@ -21,7 +21,7 @@
         <div class="form-group">
           <base-input
             :form="form"
-            field="password_"
+            field="password"
             inputType="password"
             v-model="form.password"
             placeholder="Password">

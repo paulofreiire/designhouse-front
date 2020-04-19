@@ -51,6 +51,7 @@
 <script>
   export default {
     name: "login.vue",
+    middleware: ['guest'],
     data() {
       return {
         form: this.$vform({

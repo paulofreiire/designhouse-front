@@ -69,6 +69,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     name: "register.vue",
     data() {
       return {
