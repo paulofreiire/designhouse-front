@@ -48,10 +48,11 @@
     data() {
       return {
         slimOptions: {
-          post: 'input',
+          post: 'output',
           defaultInputName: 'image',
           maxFileSize: 3,
           service: this.slimService,
+          serviceFormat: 'file',
         },
         uploading: false,
         error: ''
@@ -60,20 +61,21 @@
 
     methods: {
       slimService(formdata, progress, success, failure, slim) {
-        var image = new FormData()
-        image.append('image', slim.data.input.file)
-        console.log(slim.data)
+        this.uploading = true;
+        let image = new FormData();
+        image.append('image', formdata[0], formdata[0].name);
+        console.log(formdata);
         this.$axios.post('/designs', image)
           .then(res => {
-            console.log(res)
+            this.$router.push({
+              name: 'designs-edit',
+              params: {id: res.data.id}
+            })
           })
           .catch(error => {
             console.log(error)
           })
-          .finally(() => this.uploading = false)
-      },
-      slimInit(data, slim) {
-        console.log(data)
+          .finally(() => this.uploading = false);
       }
     }
   }
