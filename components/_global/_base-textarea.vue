@@ -2,7 +2,7 @@
   <div>
     <textarea
       class="form-control form-control-lg font-14 fw-300"
-      :rows="rows"
+      :rows=rows
       :readonly=isReadOnly
       :placeholder="placeholder"
       :class="{'is-invalid' : form.errors.has(field)}"

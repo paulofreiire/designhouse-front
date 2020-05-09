@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="text-right">
-                  <nuxt-link :to="{ name: 'settings.designs' }"
+                  <nuxt-link :to="{ name: 'settings-designs' }"
                   >Cancel
                   </nuxt-link
                   >
@@ -166,7 +166,7 @@
           .put(`/designs/${this.$route.params.id}`)
           .then(res => {
             setTimeout(() => {
-              this.$router.push({name: 'settings.designs'});
+              this.$router.push({name: 'settings-designs'});
             }, 1000);
           })
           .catch(err => console.log(err.response));

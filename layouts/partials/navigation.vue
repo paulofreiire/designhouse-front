@@ -20,7 +20,7 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav font-14 fw-300">
           <li class="nav-item active">
-            <a class="nav-link" href="#" title="Shots">Designs</a>
+            <nuxt-link :to="{name: 'designs-search'}" class="nav-link">Designs</nuxt-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Designers"
@@ -47,7 +47,7 @@
         <div
           class="upload-shot white-path font-14 fw-500 text-uppercase mr-auto"
         >
-          <a href="/upload" class="primary-bg-color text-white">
+          <a href="/upload" class="primary-bg-color tnom ext-white">
             <i class="fas fa-cloud-upload-alt"></i> Upload
           </a>
         </div>
@@ -82,16 +82,17 @@
             >
               <img
                 class="user-thumb"
-                src="~assets/images/profile.png"
+                :src="$auth.user.photo_url"
                 alt="Neba Funwi-Gabga"
               />
               <div class="usr-info">
-                                <span class="user-name font-14 fw-500"
-                                >{{$auth.user.name}}</span
-                                >
-                <span class="user-deg font-10 fw-300"
-                >{{$auth.user.tagline}}</span
-                >
+                <span class="user-name font-14 fw-500"
+                >{{$auth.user.name}}</span>
+
+                <span class="user-deg font-10 fw-300">
+                  {{$auth.user.tagline}}
+                </span>
+
                 <span class="down-chevron">
                                     <i class="fa fa-angle-down"></i>
                                 </span>
@@ -102,24 +103,28 @@
               aria-labelledby="userDropdown"
             >
               <div class="dropdown-title-group font-12 fw-500">
-                                <span class="dropdown-title text-uppercase"
-                                >Your Account</span
-                                >
+                <span class="dropdown-title text-uppercase">Your Account</span>
               </div>
               <a
                 class="dropdown-item mt-28"
                 href="#"
-                title="Profile"
-              >
+                title="Profile">
                 <i class="fa fa-user"></i>
                 Profile
               </a>
+              <nuxt-link to="/settings/dashboard"
+                         class="dropdown-item"
+                         href="#"
+                         title="Profile">
+                <i class="fa fa-tachometer-alt"></i>
+                Dashboard
+              </nuxt-link>
               <a class="dropdown-item" href="#" title="Setting">
                 <i class="fa fa-cogs"></i>
                 Setting
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"  @click.prevent="logout" title="Sign Out">
+              <a class="dropdown-item" href="#" @click.prevent="logout" title="Sign Out">
                 <i class="fa fa-lock"></i>
                 Sign Out
               </a>
@@ -137,7 +142,7 @@
   export default {
     name: "navigation.vue",
     methods: {
-      logout(){
+      logout() {
         this.$auth.logout()
       }
     }

@@ -36,6 +36,7 @@ export default {
   */
   plugins: [
     '~plugins/vform',
+    {src: '~plugins/gmaps', ssr: false},
     '~components/_global'
   ],
   /*
