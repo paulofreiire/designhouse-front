@@ -7,7 +7,10 @@
           <div class="filters d-flex justify-content-between align-items-center">
             <ul class="filters-dropdown">
               <li class="dropdown">
-                <select v-model="filters.orderBy" class="custom-select" style="width: 200px;">
+                <select
+                  v-model="filters.orderBy"
+                  @change="search"
+                  class="custom-select" style="width: 200px;">
                   <option value="latest">Latest First</option>
                   <option value="likes">Most Liked First</option>
                 </select>
@@ -57,7 +60,12 @@
     <section class="cards-block">
       <div class="container">
         <div class="row">
-          Placed
+          <base-design
+            v-for="design in designs"
+            :key="design.id"
+            :design="design">
+            {{design}}
+          </base-design>
         </div>
       </div>
     </section>
@@ -65,7 +73,10 @@
 </template>
 
 <script>
+  import baseDesign from "../../components/cards/_base-design";
+
   export default {
+    components: {baseDesign},
     data() {
       return {
         designs: [],
@@ -92,7 +103,9 @@
       search() {
         this.searching = true;
         this.$axios.get(`/search/designs?${this.queryString}`)
-          .then(res => this.designs = res.data)
+          .then(res => {
+            this.designs = res.data.data;
+          })
           .catch(e => console.log(e))
           .finally(() => this.searching = false)
       }
